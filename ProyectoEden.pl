@@ -1,0 +1,96 @@
+% seEncuentra(x,y) = x se encuentra en y
+seEncuentra("La Paz","Altiplano").
+seEncuentra("Oruro","Altiplano").
+seEncuentra("Potosi","Altiplano").
+seEncuentra("Cochabamba","Valle").
+seEncuentra("Chuquisaca","Valle").
+seEncuentra("Tarija","Valle").
+seEncuentra("Pando","Llano").
+seEncuentra("Beni","Llano").
+seEncuentra("Santa Cruz","Llano").
+
+tipoDeDestino("Historico").
+tipoDeDestino("Cultural").
+tipoDeDestino("Natural").
+tipoDeDestino("Aventura y deporte").
+tipoDeDestino("Religiosos").
+tipoDeDestino("Relax").
+
+
+actividad("Tour").
+actividad("Paseo").
+actividad("Caminata").
+actividad("Fotografia").
+actividad("Compras").
+actividad("Senderismo").
+actividad("Descanso").
+
+
+
+ambiente("Alta montaña").
+ambiente("Calles").
+ambiente("Montañoso").
+ambiente("Parque").
+ambiente("Tranquilo").
+ambiente("Atraccion").
+
+
+
+
+%destino(nombre, tipo, departamento, ambiente, precio,
+% actividadRecreativa, estrellas, Seguridad)
+destino("Tiahuanacu","Historico","La Paz","Alta montaña",35,"Tour",4,4).
+destino("Copacabana","Naturales","La Paz","Lago",35,"Paseo",5,3).
+destino("Camino de la muerte","Historico","La Paz","Montañoso",75,"Caminata",4,2).
+destino("La recoleta","Historico","Chuquisaca","Calles",55,"Fotografia",4,4).
+destino("Mercado Tarabuco","Cultural","Chuquisaca","Calles",20,"Compras",3,2).
+destino("Parque Cretacico","Historico","La Paz","Parque",30,"Fotografia",5,4).
+destino("Ruta del vino y del singani","Cultural","Tarija","Tranquilo",75,"Tour",4,4).
+destino("Cordillera de Sama","Natural","Tarija","Motañoso",50,"Senderismo",4,3).
+destino("Balnearios tomatitas","Relax","Tarija","Parque",45,"Descanso",4,4).
+destino("Monumento a la Virgen del Socavon","Cultural","Oruro","Atraccion",35,"Fotografia",3,3).
+destino("Parque Nacional Sajama","Natural","Oruro","Montañoso",55,"Paseo",3,4).
+destino("Faro de Choncupata","Historico","Oruro","Atraccion",75,"Fotografia",4,2).
+
+%recomendaciones primarias
+recomendarDestinoPorTipo(Tipo, Recomendacion) :-
+    destino(Recomendacion, Tipo, _, _, _, _, _, _).
+
+recomendarDestinoPorDepartamento(Departamento, Recomendacion) :-
+    destino(Recomendacion, _, Departamento, _, _, _, _, _).
+
+recomendarDestinoPorAmbiente(Ambiente, Recomendacion) :-
+    destino(Recomendacion, _, _, Ambiente, _, _, _, _).
+
+
+recomendarDestinoPorActividad(Actividad, Recomendacion) :-
+    destino(Recomendacion, _, _, _, _, Actividad, _, _).
+
+recomendarDestinoPorEstrellas(Estrellas, Recomendacion) :-
+    destino(Recomendacion, _, _, _, _, _, Estrellas, _).
+
+recomendarDestinoPorSeguridad(Seguridad, Recomendacion) :-
+    destino(Recomendacion, _, _, _, _, _, _, Seguridad).
+
+recomendarDestinoPorPrecio(RangoMin,RangoMax,Recomendacion) :-
+    destino(Recomendacion, _, _, _, Precio, _, _, _),
+    RangoMin >= Precio,
+    RangoMax =< Precio.
+
+
+%hallar en una lista
+suffix(Xs, Ys) :-
+    append(_, Ys, Xs).
+
+prefix(Xs, Ys) :-
+    append(Ys, _, Xs).
+
+
+
+
+
+
+
+
+
+

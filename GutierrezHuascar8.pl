@@ -1,0 +1,36 @@
+sintoma(fiebre).
+sintoma(tos).
+sintoma(congestion_nasal).
+sintoma(dolor_garganta).
+sintoma(dolor_cabeza).
+sintoma(fatiga).
+sintoma(malestar_general).
+
+enfermedad(gripe).
+enfermedad(resfrio).
+
+paciente(omar).
+paciente(juan).
+paciente(pedro).
+paciente(marcela).
+paciente(juana).
+
+tiene(omar,fiebre).
+tiene(juan,tos).
+tiene(pedro,fatiga).
+tiene(juana,malestar_general).
+
+tieneresfrio(X) :- tiene(X,fiebre);tiene(X,tos);tiene(X,congestion_nasal).
+tienegripe(X) :- tiene(X,dolor_garganta);tiene(X,dolor_cabeza);tiene(X,fatiga);tiene(X,malestar_general).
+
+medicamento(resfrio, sanatusin).
+medicamento(resfrio, sanatodo).
+medicamento(gripe, antigripal).
+medicamento(gripe, mentisan).
+
+
+recomendarmedicamento(X,Medicamento) :- (tieneresfrio(X), medicamento(resfrio,Medicamento)) ; (tienegripe(X), medicamento(gripe,Medicamento)).
+
+tienesintoma(X) :- tiene(X,Y), paciente(X), sintoma(Y).
+
+padeceenfermedad(X) :-  tieneresfrio(X); tienegripe(X).
